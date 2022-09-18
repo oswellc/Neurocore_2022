@@ -1,0 +1,131 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;
+}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;
+}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Exercise 1\
+\
+Code:\
+from scipy.stats import binom\
+n = 10\
+p = 0.2\
+x_values = list(range(n + 1))\
+dist = [binom.pmf(r, n, p) for r in x_values ]\
+print("x\\tp(x)")\
+for i in range(n + 1):\
+    print(str(x_values[i]) + "\\t" + str(dist[i]))\
+\
+Result:\
+x	p(x)\
+0	0.10737418240000006\
+1	0.26843545599999985\
+2	0.30198988800000004\
+3	0.20132659199999992\
+4	0.0880803839999999\
+5	0.026424115199999983\
+6	0.005505024000000005\
+7	0.000786432\
+8	7.372800000000001e-05\
+9	4.095999999999997e-06\
+10	1.0240000000000006e-07\
+\
+Exercise 2:\
+*using same code as exercise 1, change n = 14 and p = 0.1\
+\
+Prob of 8 quanta released with p = 0.1: 1.5959173230000027e-05\
+\
+Code for probability distribution of p given n = 14 and r = 8:\
+from scipy.stats import binom\
+import numpy as np\
+# setting the values\
+# of n and p\
+n = 14\
+r = 8\
+# defining the list of r values\
+# list of pmf values\
+for p in np.arange(0, 1, 0.1):\
+    print ([binom.pmf(r, n, p)])\
+\
+Prob of 8 quanta released for each value of p\
+x\
+0.2	0.002015279185920003\
+0.3	0.023180009522669968\
+0.4	0.09182115790847997\
+0.5	0.18328857421875008\
+0.6	0.20659760529407983\
+0.7	0.12620227406787007\
+0.8	0.03224446697471998\
+0.9	0.001292693031629999\
+1	0\
+\
+Exercise 3:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Prob of 8 quanta released with p = 0.1: 1.5959173230000027e-05\
+Prob of 5 quanta released with p = 0.1 : 0.007756158189780006\
+Total Likelihood:\cb2  \expnd0\expndtw0\kerning0
+1.23781872\'d710E-7\cb4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Total log likelihood:\uc0\u8722 6.907342953\cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+Code for likelifood:\
+from scipy.stats import binom\
+import numpy as np\
+import math\
+n = 14.0\
+r = 8.0\
+for p in np.arange(0.0, 1.0, 0.10):\
+    x = binom.pmf(r, n, p) \
+    y = binom.pmf(5.0, n, p)\
+    print (x * y)\
+    \
+  Kept getting math domain error for log, would have added print (log(x) + log(y)) if it had worked\
+Results: \
+0.0\
+1.2378187214998254e-07\
+0.0001732842750806352\
+0.00455057542282908\
+0.01897003133922153\
+0.022396467626094804\
+0.00843112503965401\
+0.0008358199756216644\
+1.0830267192539667e-05\
+1.5281712611108898e-09\
+\
+Max value to get quanta released of 5 and 8 is if release probability was 0.5\
+\
+Estimate would have higher confidence with increased sample size \
+\
+Exercise 4:\
+Code to find mean:\
+import matplotlib.pyplot as plt\
+import statistics\
+your_array = [2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10]\
+ \
+print (statistics.mean(your_array))\
+\
+Result: 6.32\
+I also had trouble with this working (just showed me 0 values when I plugged 6.32 in for r in exercise 2 code)\
+\
+Exercise 5:\
+Pdf for p given r = 7\
+\
+[0.0]\
+[0.00016415149608]\
+[0.009212704849920006]\
+[0.06181335872712005]\
+[0.15740769927168002]\
+[0.20947265624999983]\
+[0.15740769927168008]\
+[0.061813358727120016]\
+[0.009212704849919994]\
+[0.00016415149607999985]\
+\
+Most likely release prob value is 0.5\
+\
+Given that p is actually 0.3, the likelihood that we would have gotten 7 quantal release events is 0.06181335872712, which is not less than 0.05 and thus we cannot reject the null hypothesis that the 7 quanta released occurred by chance rather than the temperature being the cause.\
+}
