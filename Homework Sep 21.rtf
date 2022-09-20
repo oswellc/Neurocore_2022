@@ -1,0 +1,85 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0\c87059;}
+\margl1440\margr1440\vieww17860\viewh14320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 1. \
+\
+import math\
+\
+mean = 10\
+stdev = 2\
+n = 5\
+\
+SEM = stdev/math.sqrt(n)\
+print (SEM)\
+\
+confidence_interval = (mean + (SEM * 1.96)), (mean - (SEM * 1.96))\
+print (confidence_interval)\
+\
+N = 5, (11.753077294359835, 8.246922705640165)\
+N  = 10, (11.239612842786006, 8.760387157213994)\
+N = 20, (10.876538647179917, 9.123461352820083)\
+N = 40, (10.619806421393003, 9.380193578606997)\
+N = 80, (10.438269323589958, 9.561730676410042)\
+N = 160, (10.3099032106965, 9.6900967893035)\
+N = 1000, (10.1239612842786, 9.8760387157214)\
+\
+2.\
+\
+Not sure how to import table for t-distribution for degrees of freedom, so going to say 1.7 for t. If I could code I would import a table matching df to t values for 95% confidence and call the t value based on n (df = n-1). I just inserted the proper t values manually for now. \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 import math\
+\
+mean = 10\
+stdev = 2\
+n = 5\
+\
+SEM = stdev/math.sqrt(n)\
+print (SEM)\
+\
+confidence_interval = (mean + (SEM * 1.7)), (mean - (SEM * 1.7))\
+print (confidence_interval)\
+\
+N = 5, (11.905129916829821, 8.094870083170179)\
+N  = 10, (11.159290990217729, 8.840709009782271)\
+N = 20, (10.773679520214927, 9.226320479785073)\
+N = 40, (10.53280425726762, 9.46719574273238)\
+N = 80, (10.37216466957793, 9.62783533042207)\
+N = 160, (10.261598470754132, 9.738401529245868)\
+N = 1000, (10.1041783160698, 9.8958216839302)\
+\
+\
+3. \
+Again, not sure how to do this but first I would set up a random value generator to pick a certain number of values within a data set, then have it find the mean (x*1, x*2, x*3..) and st dev of the samples. I would have the previous commands in a loop so it would sample and analyze the sample however many times I wanted. I would store the means from each sampling in an array to get mu*. Then we could use the calculated values for the mean and standard deviation to find the confidence intervals for our resampled population.\
+\
+4. \
+If \'93the \cf2 \expnd0\expndtw0\kerning0
+posterior distribution for given X is itself a Gaussian with a mean value of x and a standard deviation of \uc0\u963 /sqrt(n)\'94, then:\cf0 \kerning1\expnd0\expndtw0 \
+\
+import math\
+\
+mean = 10\
+n = 5\
+stdev = 2/math.sqrt(n)\
+\
+SEM = stdev/math.sqrt(n)\
+print (SEM)\
+\
+confidence_interval = (mean + (SEM * 1.96)), (mean - (SEM * 1.96))\
+print (confidence_interval)\
+\
+*same but st dev calculated differently \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 N = 5, (10.784, 9.216)\
+N  = 10, (10.392, 9.608)\
+N = 20, (10.196, 9.804)\
+N = 40, ((10.098, 9.902)\
+N = 80, (10.049, 9.951)\
+N = 160, (10.0245, 9.9755)\
+N = 1000, (10.003923923923924, 9.996076076076076)\
+}
