@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww16820\viewh9180\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import numpy as np\
+import scipy.stats as st\
+\
+mu_1 = 1\
+mu_2 = 2\
+sigma = 1\
+\
+P_values_python = []\
+P_values_calculated = []\
+Bonferroni = []\
+Benjamini_Hochberg = []\
+N = 100\
+x = 0\
+\
+\
+while x < 1000:\
+    X1 = np.random.normal(mu_1, sigma, N)\
+    X2 = np.random.normal(mu_2, sigma, N)\
+    Sp = np.sqrt((X1.var(ddof=1) + X2.var(ddof=1))/2)\
+    t_U = (X1.mean()-X2.mean())/(Sp*np.sqrt(2/N))\
+    p_U = 2.*(1-st.t.cdf(abs(t_U), 2*N-2))\
+    tstat, pval = st.ttest_ind(X1, X2)\
+    P_values_python.append(pval)\
+    P_values_calculated.append(p_U)\
+    x = x + 1\
+\
+\
+for c in P_values_python:\
+    if c < 0.05/N:\
+        Bonferroni.append(c)\
+ \
+print ("signficant with Bonferroni correction", Bonferroni)   \
+\
+    \
+P_values_python.sort()\
+\
+for a in P_values_python:\
+    crit_value = (a/1000) * 0.05\
+    if a < crit_value:\
+        Benjamini_Hochberg.append(a)\
+            \
+Benjamini_Hochberg.sort(reverse=True)\
+print ("signficant with Benjamini-Hochberg correction", Benjamini_Hochberg)\
+\
+Part 3. \
+\
+With equal mean values, 2 experiments returned significant results with the Bonferroni correction and none with the Benjamini-Hochberg correction. With means of 1 and 2, many experiments returned significant results with the Bonferroni correction but still none with the Benjamini-Hochberg correction. }
