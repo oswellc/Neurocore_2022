@@ -1,0 +1,132 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Exercise 1:\
+import matplotlib.pyplot as plt\
+x = [3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0]\
+y = [1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0]\
+plt.scatter(x, y)\
+plt.xlabel('age')\
+plt.ylabel('wing length')\
+plt.title("age versus wing length ")\
+plt.show()\
+\
+Exercise 2:\
+import matplotlib.pyplot as plt\
+import numpy as np\
+\
+x = np.array([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0])\
+y = np.array([1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0])\
+plt.plot(x, y, 'o')\
+plt.xlabel('age')\
+plt.ylabel('wing length')\
+plt.title("age versus wing length ")\
+m, b = np.polyfit(x, y, 1)\
+plt.plot(x, m*x+b)\
+plt.show()\
+print ('slope is:', m)\
+print ('y-intercept is', b)\
+\
+Exercise 3:\
+import matplotlib.pyplot as plt\
+import numpy as np\
+import scipy.stats \
+x = np.array([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0])\
+y = np.array([1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0])\
+plt.plot(x, y, 'o')\
+plt.xlabel('age')\
+plt.ylabel('wing length')\
+plt.title("age versus wing length ")\
+m, b, r_value, p_value, std_err = scipy.stats.linregress(x, y)\
+plt.plot(x, m*x+b)\
+plt.show()\
+SD = (std_err * np.sqrt(13))\
+print ('slope is:', m)\
+print ('y-intercept is', b)\
+print ('standard deviation:', SD)\
+mu_1 = 0\
+mu_2 = m\
+sigma = SD\
+N = 10\
+X1 = np.random.normal(mu_1, sigma, N)\
+X2 = np.random.normal(mu_2, sigma, N)\
+tstat, pval = scipy.stats.ttest_ind(X1, X2)\
+print ('The p-value is:', pval)\
+\
+Yes, we can reject the null hypothesis that the slope is 0.\
+\
+Exercise 4:\
+\
+import matplotlib.pyplot as plt\
+import numpy as np\
+import scipy.stats \
+x = np.array([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0])\
+y = np.array([1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0])\
+plt.plot(x, y, 'o')\
+plt.xlabel('age')\
+plt.ylabel('wing length')\
+plt.title("age versus wing length ")\
+m, b, r_value, p_value, std_err = scipy.stats.linregress(x, y)\
+plt.plot(x, m*x+b)\
+plt.show()\
+SD = (std_err * np.sqrt(13))\
+print ('slope is:', m)\
+print ('y-intercept is', b)\
+print ('standard deviation:', SD)\
+mu_1 = 0\
+mu_2 = m\
+sigma = SD\
+# Get random samples, same n\
+N = 10\
+X1 = np.random.normal(mu_1, sigma, N)\
+X2 = np.random.normal(mu_2, sigma, N)\
+tstat, pval = scipy.stats.ttest_ind(X1, X2)\
+pprint ('The t statistic is:', tstat)\
+print ('The p-value is:', pval)\
+Y_true = [1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0]  \
+Y_pred = [1.6,1.9,2.2,2.4,2.7, 2.9, 3.2, 3.7, 4.0, 4.5, 4.8, 5.1, 5.3]  \
+MSE = np.square(np.subtract(Y_true,Y_pred)).mean()\
+print ('MSE:', MSE)\
+slope_confidence = (m + (tstat * np.sqrt(MSE/(sum(X1-X2)**2)))), (m - (tstat * np.sqrt(MSE/(sum(X1-X2)**2))))\
+print ('confidence interval for slope:', slope_confidence)\
+\
+Exercise 5:\
+from sklearn.metrics import r2_score\
+Y_true = [1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0]  \
+Y_pred = [1.6,1.9,2.2,2.4,2.7, 2.9, 3.2, 3.7, 4.0, 4.5, 4.8, 5.1, 5.3]  \
+r2 = r2_score(Y_true, Y_pred)\
+print('r2 score for perfect model is', r2)\
+\
+Exercise 6:\
+from numpy import cov \
+covariance = cov(x,y)\
+Pearson = covariance[1,0]/ (np.std(x) * np.std(y))\
+print ('r is:', Pearson)\
+\
+Exercise 7:\
+import numpy as np\
+import matplotlib.pyplot as plt\
+import scipy.stats \
+x = np.array([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 11.0, 12.0, 14.0, 15.0, 16.0, 17.0])\
+original = np.array([1.4, 1.5, 2.2, 2.4, 3.1, 3.2, 3.2, 3.9, 4.1, 4.7, 4.5, 5.2, 5.0])\
+noise = np.random.normal(0, .1, original.shape)\
+new_signal = original + noise\
+plt.plot(x, new_signal, 'o')\
+plt.xlabel('age')\
+plt.ylabel('wing length')\
+plt.title("age versus wing length ")\
+m, b, r_value, p_value, std_err = scipy.stats.linregress(x, new_signal)\
+plt.plot(x, m*x+b)\
+plt.show()\
+SD = (std_err * np.sqrt(13))\
+print ('slope is:', m)\
+print ('y-intercept is', b)\
+print ('standard deviation:', SD)\
+\
+Adding this amount of noise didn\'92t really change the regression, but if the amount of noise were increased it definitely could. \
+\
+}
